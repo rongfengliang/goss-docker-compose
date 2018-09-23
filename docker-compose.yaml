@@ -1,0 +1,20 @@
+version: "3"
+services:
+  goss:
+    image: aelsabbahy/goss
+    container_name: goss
+    command: goss
+    volumes:
+    - code:/goss
+  web:
+    image: nginx
+    environment:
+    - GOSS_PATH=/goss
+    - GOSS_FILES_PATH=/gossfile/
+    ports:
+    - 8080:80
+    volumes:
+    - code:/goss
+    - ./gossfiles/:/gossfile/
+volumes:
+    code:
